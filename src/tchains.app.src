@@ -1,0 +1,11 @@
+{application, tchains, [
+    {description, "Simple Task Chains"},
+    {vsn, "0.1"},
+    {registered, []},
+    {applications, [
+        kernel,
+        stdlib
+    ]},
+    {mod, {tchains_app, []}},
+    {env, []}
+]}.
