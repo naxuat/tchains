@@ -19,10 +19,6 @@
 
 -include("tchains_internal.hrl").
 
--ifdef(TEST).
--include_lib("eunit/include/eunit.hrl").
--compile([export_all]).
--else.
 -export([
     ignore_error/3,
     choose/3,
@@ -32,6 +28,10 @@
     merge_any/3,
     in_context/3
 ]).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+-compile([export_all]).
 -endif.
 
 ignore_error([Tasks], Value, Engine) ->

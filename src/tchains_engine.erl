@@ -17,10 +17,6 @@
 
 -module(tchains_engine).
 
--ifdef(TEST).
--include_lib("eunit/include/eunit.hrl").
--compile([export_all]).
--else.
 -export([
     new/1,
     env/1,
@@ -32,6 +28,10 @@
     stop/1,
     fail/1
 ]).
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+-compile([export_all]).
 -endif.
 
 % -include("tchains_internal.hrl").
