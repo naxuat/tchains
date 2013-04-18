@@ -55,7 +55,7 @@
 new(Params) ->
     Handlers = lists:map(fun get_tasks/1,
                          tchains_utils:keyfind(handlers, 1, Params,
-                                               [tchains_basic])),
+                                               [tchains_flow])),
     Env = tchains_utils:keyfind(env, 1, Params, []),
     {ok, #engine{handlers=Handlers, env=Env}}.
 
@@ -181,7 +181,7 @@ sanity_test_() ->
     Chain4 = [
         oopsy
     ],
-    Params = [{handlers, [?MODULE, tchains_basic]}],
+    Params = [{handlers, [?MODULE, tchains_flow]}],
     {"Sanity tests", [
         ?_assertMatch({stop, {invalid_task_spec, _}}, tchains:exec(Chain1, does_not_matter, Params)),
         ?_assertEqual(does_not_matter, tchains:exec(Chain2, does_not_matter, Params)),
