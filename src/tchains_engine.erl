@@ -53,11 +53,15 @@
 ]).
 
 new(Params) ->
-    Handlers = lists:map(fun get_tasks/1,
-                         tchains_utils:keyfind(handlers, 1, Params,
-                                               [tchains_flow])),
-    Env = tchains_utils:keyfind(env, 1, Params, []),
-    {ok, #engine{handlers=Handlers, env=Env}}.
+    case proplists:get_value(handlers, Params, []) of
+        [] ->
+            {error, no_handler_modules};
+
+        Candidates ->
+            Handlers = lists:map(fun get_tasks/1, Candidates),
+            Env = proplists:get_value(env, Params, []),
+            {ok, #engine{handlers=Handlers, env=Env}}
+    end.
 
 env(#engine{env=Env}) ->
     Env.
